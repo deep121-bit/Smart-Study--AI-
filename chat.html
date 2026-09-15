@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Document Chat — SmartStudy AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { bg:'#050816', surface:'#0F172A', card:'#111827', primary:'#6366F1', secondary:'#22D3EE', success:'#10B981', warning:'#F59E0B', danger:'#EF4444', ink:'#F8FAFC', muted:'#94A3B8' },
+    fontFamily: { display:['Space Grotesk','Inter','sans-serif'], sans:['Inter','sans-serif'] }
+  } } }
+</script>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+</head>
+<body class="font-sans h-screen overflow-hidden">
+
+<div class="chat-shell">
+  <!-- history column -->
+  <aside class="chat-history-col border-r border-white/5 p-4 flex flex-col bg-surface/40">
+    <a href="index.html" class="flex items-center gap-2.5 px-2 mb-6">
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center"><i data-lucide="sparkles" class="w-4 h-4 text-white"></i></div>
+      <span class="font-display font-semibold text-sm">SmartStudy AI</span>
+    </a>
+    <a href="dashboard.html" class="sidebar-link mb-1"><i data-lucide="arrow-left" class="w-4 h-4"></i> Dashboard</a>
+    <button class="btn btn-primary btn-sm w-full justify-center mt-2 mb-5"><i data-lucide="plus" class="w-4 h-4"></i> New chat</button>
+
+    <div class="text-[11px] uppercase tracking-wide text-muted mb-2 px-1">Recent</div>
+    <div class="flex-1 overflow-y-auto space-y-1">
+      <div class="sidebar-link active !py-2.5"><i data-lucide="file-text" class="w-4 h-4 shrink-0"></i> <span class="truncate">Data Structures — Ch. 4</span></div>
+      <div class="sidebar-link !py-2.5"><i data-lucide="presentation" class="w-4 h-4 shrink-0"></i> <span class="truncate">OS — Deadlock Slides</span></div>
+      <div class="sidebar-link !py-2.5"><i data-lucide="file-type-2" class="w-4 h-4 shrink-0"></i> <span class="truncate">DBMS Normalization</span></div>
+      <div class="sidebar-link !py-2.5"><i data-lucide="file-spreadsheet" class="w-4 h-4 shrink-0"></i> <span class="truncate">Aptitude Sheet</span></div>
+    </div>
+  </aside>
+
+  <!-- chat column -->
+  <div class="flex flex-col min-w-0">
+    <header class="flex items-center justify-between px-6 py-4 border-b border-white/5">
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-9 h-9 rounded-lg bg-danger/15 grid place-items-center shrink-0"><i data-lucide="file-text" class="w-4 h-4 text-danger"></i></div>
+        <div class="min-w-0">
+          <div class="text-sm font-semibold truncate">Data Structures — Ch. 4 Trees.pdf</div>
+          <div class="text-xs text-muted">42 pages · Tutor Agent active</div>
+        </div>
+      </div>
+      <button class="lg:hidden btn btn-ghost btn-sm">Insights</button>
+    </header>
+
+    <div id="chatMessages" class="flex-1 overflow-y-auto px-6 py-6 space-y-5"></div>
+
+    <div class="p-4 border-t border-white/5">
+      <div class="flex flex-wrap gap-2 mb-3">
+        <button class="pill hover:border-primary/50 transition-colors" data-suggest="Summarize this chapter in 5 bullet points">Summarize this chapter</button>
+        <button class="pill hover:border-primary/50 transition-colors" data-suggest="Give me 5 quiz questions from page 12">Quiz me on page 12</button>
+        <button class="pill hover:border-primary/50 transition-colors" data-suggest="Explain AVL tree rotations simply">Explain AVL rotations</button>
+      </div>
+      <form id="chatForm" class="flex items-end gap-3 glass rounded-2xl p-2.5">
+        <button type="button" class="w-9 h-9 rounded-xl grid place-items-center text-muted hover:text-ink shrink-0"><i data-lucide="paperclip" class="w-4 h-4"></i></button>
+        <textarea id="chatInput" rows="1" placeholder="Ask anything about this document..." class="flex-1 bg-transparent outline-none resize-none text-sm py-2 placeholder:text-muted"></textarea>
+        <button type="button" class="w-9 h-9 rounded-xl grid place-items-center text-muted hover:text-ink shrink-0"><i data-lucide="mic" class="w-4 h-4"></i></button>
+        <button type="submit" class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-secondary grid place-items-center shrink-0"><i data-lucide="arrow-up" class="w-4 h-4 text-white"></i></button>
+      </form>
+    </div>
+  </div>
+
+  <!-- insights column -->
+  <aside class="chat-insights-col border-l border-white/5 p-5 overflow-y-auto bg-surface/40">
+    <h3 class="font-display font-semibold text-sm mb-4">Document insights</h3>
+    <div class="card p-4 mb-4">
+      <div class="text-xs text-muted mb-2">Key concepts detected</div>
+      <div class="flex flex-wrap gap-2">
+        <span class="pill !py-1 !text-[11px]">Binary Trees</span>
+        <span class="pill !py-1 !text-[11px]">AVL Rotation</span>
+        <span class="pill !py-1 !text-[11px]">Traversal</span>
+        <span class="pill !py-1 !text-[11px]">Heap</span>
+        <span class="pill !py-1 !text-[11px]">Time Complexity</span>
+      </div>
+    </div>
+    <div class="card p-4 mb-4">
+      <div class="text-xs text-muted mb-2">Reading progress</div>
+      <div class="w-full h-1.5 rounded-full bg-white/5 overflow-hidden mb-2">
+        <div class="h-full w-3/5 rounded-full bg-gradient-to-r from-primary to-secondary"></div>
+      </div>
+      <div class="text-[11px] text-muted">25 of 42 pages referenced</div>
+    </div>
+    <h3 class="font-display font-semibold text-sm mb-3">Suggested questions</h3>
+    <div class="space-y-2">
+      <button class="w-full text-left text-xs p-3 rounded-xl card card-lift" data-suggest="What's the time complexity of AVL insertion?">What's the time complexity of AVL insertion?</button>
+      <button class="w-full text-left text-xs p-3 rounded-xl card card-lift" data-suggest="Compare BST vs AVL tree">Compare BST vs AVL tree</button>
+      <button class="w-full text-left text-xs p-3 rounded-xl card card-lift" data-suggest="Generate a flashcard deck from this chapter">Generate a flashcard deck from this chapter</button>
+    </div>
+  </aside>
+</div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/chat.js"></script>
+</body>
+</html>

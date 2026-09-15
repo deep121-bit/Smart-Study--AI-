@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SmartStudy AI — Your Personal Team of AI Learning Agents</title>
+<meta name="description" content="Upload notes, PDFs, and slides. Let nine specialized AI agents turn them into summaries, quizzes, flashcards, mind maps, and a personalized learning path." />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Tailwind (CDN, no-build) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#050816', surface: '#0F172A', card: '#111827',
+          primary: '#6366F1', secondary: '#22D3EE',
+          success: '#10B981', warning: '#F59E0B', danger: '#EF4444',
+          ink: '#F8FAFC', muted: '#94A3B8',
+        },
+        fontFamily: {
+          display: ['Space Grotesk', 'Inter', 'sans-serif'],
+          sans: ['Inter', 'sans-serif'],
+        },
+        borderRadius: { xl2: '28px' },
+      }
+    }
+  }
+</script>
+
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+</head>
+<body class="font-sans">
+
+<!-- ============================= NAVBAR ============================= -->
+<header class="navbar">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2.5">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/30">
+        <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
+      </div>
+      <span class="font-display font-semibold text-lg tracking-tight">SmartStudy <span class="text-secondary">AI</span></span>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-9">
+      <a href="#features" class="nav-link active">Features</a>
+      <a href="#agents" class="nav-link">Agents</a>
+      <a href="#how" class="nav-link">How it Works</a>
+      <a href="#analytics" class="nav-link">Analytics</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+    </nav>
+
+    <div class="hidden lg:flex items-center gap-3">
+      <a href="dashboard.html" class="btn btn-ghost btn-sm">Sign In</a>
+      <a href="dashboard.html" class="btn btn-primary btn-sm">
+        Start Learning Free <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+
+    <button id="menuBtn" class="lg:hidden w-10 h-10 grid place-items-center rounded-lg border border-white/10">
+      <i data-icon="open" data-lucide="menu" class="w-5 h-5"></i>
+      <i data-icon="close" data-lucide="x" class="w-5 h-5 hidden"></i>
+    </button>
+  </div>
+
+  <div id="mobileMenu" class="hidden lg:hidden flex-col gap-1 px-6 pb-6 glass">
+    <a href="#features" class="nav-link py-2">Features</a>
+    <a href="#agents" class="nav-link py-2">Agents</a>
+    <a href="#how" class="nav-link py-2">How it Works</a>
+    <a href="#analytics" class="nav-link py-2">Analytics</a>
+    <a href="#pricing" class="nav-link py-2">Pricing</a>
+    <a href="#faq" class="nav-link py-2">FAQ</a>
+    <a href="dashboard.html" class="btn btn-primary btn-sm w-full mt-3 justify-center">Start Learning Free</a>
+  </div>
+</header>
+
+<!-- ============================= HERO ============================= -->
+<section class="relative pt-40 pb-24 lg:pt-48 lg:pb-32 overflow-hidden">
+  <div class="absolute top-24 -left-24 w-72 h-72 bg-primary/25 rounded-full blur-[100px] float-slow"></div>
+  <div class="absolute top-40 right-0 w-96 h-96 bg-secondary/15 rounded-full blur-[120px] float-slow float-delay"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center relative">
+    <div class="reveal" style="--d:0ms">
+      <div class="pill mb-7">
+        <span class="dot dot-pulse"></span> 9 specialized agents · live now
+      </div>
+
+      <h1 class="font-display font-semibold text-[2.6rem] leading-[1.08] sm:text-6xl lg:text-[3.6rem] lg:leading-[1.05] tracking-tight">
+        Learn smarter with your
+        <span class="text-gradient block">personal team of AI agents</span>
+      </h1>
+
+      <p class="text-muted text-lg mt-6 max-w-xl leading-relaxed">
+        Upload PDFs, notes, slide decks, DOCX, and research papers — nine specialized agents turn them into summaries, flashcards, quizzes, interview prep, coding walkthroughs, and a roadmap built around how you actually learn.
+      </p>
+
+      <div class="flex flex-wrap items-center gap-4 mt-9">
+        <a href="dashboard.html" class="btn btn-primary">
+          Start Learning Free <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+        <button class="btn btn-ghost" onclick="document.getElementById('demoVideo').scrollIntoView({behavior:'smooth'})">
+          <i data-lucide="play-circle" class="w-4 h-4"></i> Watch Demo
+        </button>
+      </div>
+
+      <div class="flex items-center gap-6 mt-10 text-sm text-muted">
+        <div class="flex -space-x-3">
+          <div class="w-9 h-9 rounded-full border-2 border-bg bg-gradient-to-br from-primary to-secondary"></div>
+          <div class="w-9 h-9 rounded-full border-2 border-bg bg-gradient-to-br from-secondary to-success"></div>
+          <div class="w-9 h-9 rounded-full border-2 border-bg bg-gradient-to-br from-warning to-danger"></div>
+          <div class="w-9 h-9 rounded-full border-2 border-bg bg-card grid place-items-center text-[10px] font-semibold">2k+</div>
+        </div>
+        <span>Trusted by students prepping for placements &amp; exams</span>
+      </div>
+    </div>
+
+    <!-- Interactive dashboard preview -->
+    <div class="reveal-scale relative" style="--d:120ms">
+      <div class="absolute -top-8 -right-6 w-40 rotate-6 card p-3.5 float glow-primary z-20 hidden sm:block">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-6 h-6 rounded-md bg-success/20 grid place-items-center"><i data-lucide="check" class="w-3.5 h-3.5 text-success"></i></div>
+          <span class="text-xs font-semibold">Quiz scored</span>
+        </div>
+        <div class="text-2xl font-display font-bold text-success">94%</div>
+        <div class="text-[11px] text-muted mt-1">Data Structures · Ch. 4</div>
+      </div>
+
+      <div class="absolute -bottom-10 -left-8 w-44 -rotate-6 card p-3.5 float float-delay-2 glow-cyan z-20 hidden sm:block">
+        <div class="flex items-center gap-2 mb-2">
+          <i data-lucide="flame" class="w-4 h-4 text-warning"></i>
+          <span class="text-xs font-semibold">12-day streak</span>
+        </div>
+        <div class="flex gap-1">
+          <span class="w-4 h-6 rounded-sm bg-secondary/70"></span>
+          <span class="w-4 h-6 rounded-sm bg-secondary/70"></span>
+          <span class="w-4 h-6 rounded-sm bg-secondary"></span>
+          <span class="w-4 h-6 rounded-sm bg-secondary"></span>
+          <span class="w-4 h-6 rounded-sm bg-white/10"></span>
+        </div>
+      </div>
+
+      <div class="grad-border card p-2 glow-primary">
+        <div class="rounded-2xl overflow-hidden bg-surface border border-white/5">
+          <div class="flex items-center gap-2 px-4 py-3 border-b border-white/5">
+            <span class="w-2.5 h-2.5 rounded-full bg-danger/70"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-warning/70"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-success/70"></span>
+            <span class="ml-3 text-xs text-muted">smartstudy.ai/dashboard</span>
+          </div>
+
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <div class="text-sm font-semibold">Good evening, Ananya</div>
+                <div class="text-xs text-muted">Tuesday roadmap · 3 tasks left</div>
+              </div>
+              <div class="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-secondary"></div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 mb-4">
+              <div class="card p-3">
+                <div class="text-[11px] text-muted mb-1">Study time</div>
+                <div class="text-lg font-display font-bold">4.2h</div>
+              </div>
+              <div class="card p-3">
+                <div class="text-[11px] text-muted mb-1">Accuracy</div>
+                <div class="text-lg font-display font-bold text-secondary">88%</div>
+              </div>
+              <div class="card p-3">
+                <div class="text-[11px] text-muted mb-1">XP today</div>
+                <div class="text-lg font-display font-bold text-warning">+240</div>
+              </div>
+            </div>
+
+            <div class="card p-4">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-semibold text-muted uppercase tracking-wide">Weekly focus</span>
+                <span class="text-[11px] text-secondary">+18% vs last week</span>
+              </div>
+              <svg viewBox="0 0 300 90" class="w-full h-20">
+                <polyline points="0,70 40,55 80,60 120,35 160,42 200,20 240,28 300,10"
+                  fill="none" stroke="#22D3EE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="0,70 40,55 80,60 120,35 160,42 200,20 240,28 300,10 300,90 0,90"
+                  fill="url(#g1)" stroke="none" opacity="0.35"/>
+                <defs>
+                  <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#22D3EE"/>
+                    <stop offset="100%" stop-color="#050816" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= LOGO / TRUST STRIP ============================= -->
+<section class="border-y border-white/5 py-8">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <p class="text-center text-xs uppercase tracking-[0.2em] text-muted mb-6">Built for learners headed into rooms like these</p>
+    <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 opacity-60 text-sm font-semibold font-display">
+      <span>Google</span><span>Microsoft</span><span>Amazon</span><span>Meta</span><span>Nvidia</span><span>Adobe</span><span>Atlassian</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= STATISTICS ============================= -->
+<section class="py-20 lg:py-28">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
+    <div class="reveal text-center" style="--d:0ms">
+      <div class="font-display font-bold text-4xl lg:text-5xl text-gradient"><span data-counter="120" data-suffix="K+">0</span></div>
+      <div class="text-muted text-sm mt-2">Documents processed</div>
+    </div>
+    <div class="reveal text-center" style="--d:80ms">
+      <div class="font-display font-bold text-4xl lg:text-5xl text-gradient"><span data-counter="9" data-suffix="">0</span></div>
+      <div class="text-muted text-sm mt-2">Specialized AI agents</div>
+    </div>
+    <div class="reveal text-center" style="--d:160ms">
+      <div class="font-display font-bold text-4xl lg:text-5xl text-gradient"><span data-counter="94" data-suffix="%">0</span></div>
+      <div class="text-muted text-sm mt-2">Avg. quiz accuracy lift</div>
+    </div>
+    <div class="reveal text-center" style="--d:240ms">
+      <div class="font-display font-bold text-4xl lg:text-5xl text-gradient"><span data-counter="38" data-suffix="K+">0</span></div>
+      <div class="text-muted text-sm mt-2">Active learners</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= FEATURES ============================= -->
+<section id="features" class="py-20 lg:py-28 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="max-w-2xl mx-auto text-center reveal">
+      <span class="pill">Everything in one workspace</span>
+      <h2 class="font-display font-semibold text-3xl lg:text-[2.75rem] mt-5 tracking-tight">One platform, every study tool you'd otherwise juggle across ten tabs</h2>
+      <p class="text-muted mt-4">From the first upload to interview-day drills — each feature is powered by an agent that specializes in exactly that job.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-16">
+      <!-- feature cards -->
+      <template id="feature-template"></template>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= MULTI-AGENT SECTION ============================= -->
+<section id="agents" class="py-20 lg:py-28 border-t border-white/5 relative overflow-hidden">
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[140px]"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+    <div class="max-w-2xl mx-auto text-center reveal">
+      <span class="pill">The agent roster</span>
+      <h2 class="font-display font-semibold text-3xl lg:text-[2.75rem] mt-5 tracking-tight">Nine agents, each running its own lane</h2>
+      <p class="text-muted mt-4">They read the same source material and hand off context to one another, so your notes, quizzes, and roadmap always stay in sync.</p>
+    </div>
+
+    <div id="agentGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-16"></div>
+  </div>
+</section>
+
+<!-- ============================= HOW IT WORKS ============================= -->
+<section id="how" class="py-20 lg:py-28 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="max-w-2xl mx-auto text-center reveal">
+      <span class="pill">The workflow</span>
+      <h2 class="font-display font-semibold text-3xl lg:text-[2.75rem] mt-5 tracking-tight">From upload to mastery in four steps</h2>
+    </div>
+
+    <div class="grid lg:grid-cols-4 gap-6 mt-16 relative">
+      <div class="hidden lg:block absolute top-8 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-transparent via-white/15 to-transparent"></div>
+
+      <div class="reveal relative" style="--d:0ms">
+        <div class="w-16 h-16 rounded-2xl card grid place-items-center mb-5 relative z-10 glow-primary">
+          <i data-lucide="upload-cloud" class="w-6 h-6 text-secondary"></i>
+        </div>
+        <div class="text-xs font-semibold text-secondary mb-1">Step 01</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Upload your material</h3>
+        <p class="text-muted text-sm leading-relaxed">Drop in PDFs, DOCX, PPTX, scanned notes, or research papers. OCR handles the messy scans.</p>
+      </div>
+      <div class="reveal relative" style="--d:100ms">
+        <div class="w-16 h-16 rounded-2xl card grid place-items-center mb-5 relative z-10 glow-primary">
+          <i data-lucide="brain-circuit" class="w-6 h-6 text-secondary"></i>
+        </div>
+        <div class="text-xs font-semibold text-secondary mb-1">Step 02</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Agents read &amp; structure it</h3>
+        <p class="text-muted text-sm leading-relaxed">Notes, Research, and Roadmap agents pull out concepts, citations, and a study sequence.</p>
+      </div>
+      <div class="reveal relative" style="--d:200ms">
+        <div class="w-16 h-16 rounded-2xl card grid place-items-center mb-5 relative z-10 glow-primary">
+          <i data-lucide="message-square-text" class="w-6 h-6 text-secondary"></i>
+        </div>
+        <div class="text-xs font-semibold text-secondary mb-1">Step 03</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Practice with your team</h3>
+        <p class="text-muted text-sm leading-relaxed">Chat with your documents, run quizzes, flip flashcards, and rehearse interview answers.</p>
+      </div>
+      <div class="reveal relative" style="--d:300ms">
+        <div class="w-16 h-16 rounded-2xl card grid place-items-center mb-5 relative z-10 glow-primary">
+          <i data-lucide="line-chart" class="w-6 h-6 text-secondary"></i>
+        </div>
+        <div class="text-xs font-semibold text-secondary mb-1">Step 04</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Track what's actually improving</h3>
+        <p class="text-muted text-sm leading-relaxed">Analytics show accuracy trends, streaks, and weak topics — so the next session adapts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= DEMO VIDEO STRIP ============================= -->
+<section id="demoVideo" class="py-20 lg:py-28 border-t border-white/5">
+  <div class="max-w-5xl mx-auto px-6 lg:px-8 reveal-scale">
+    <div class="grad-border card p-2 glow-cyan">
+      <div class="relative rounded-2xl overflow-hidden aspect-video bg-surface border border-white/5 grid place-items-center group cursor-pointer">
+        <div class="absolute inset-0 opacity-40" style="background: radial-gradient(60% 60% at 50% 40%, rgba(99,102,241,0.5), transparent);"></div>
+        <button class="relative z-10 w-20 h-20 rounded-full btn-primary btn grid place-items-center p-0 group-hover:scale-110 transition-transform">
+          <i data-lucide="play" class="w-7 h-7"></i>
+        </button>
+        <span class="absolute bottom-5 left-6 text-sm text-muted">2 min product walkthrough</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= LEARNING ANALYTICS PREVIEW ============================= -->
+<section id="analytics" class="py-20 lg:py-28 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-14 items-center">
+    <div class="reveal">
+      <span class="pill">See your own data</span>
+      <h2 class="font-display font-semibold text-3xl lg:text-[2.6rem] mt-5 tracking-tight">Analytics that explain <span class="text-gradient">why</span>, not just what</h2>
+      <p class="text-muted mt-4 leading-relaxed">Every quiz, flashcard session, and chat feeds a single analytics engine — surfacing the topics that are actually costing you marks, not just a generic percentage.</p>
+
+      <div class="space-y-4 mt-8">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-primary/15 grid place-items-center shrink-0"><i data-lucide="target" class="w-5 h-5 text-primary"></i></div>
+          <div>
+            <div class="font-semibold text-sm">Weak-topic detection</div>
+            <div class="text-muted text-sm">Flags concepts where accuracy is trending down, not just low.</div>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-secondary/15 grid place-items-center shrink-0"><i data-lucide="calendar-check" class="w-5 h-5 text-secondary"></i></div>
+          <div>
+            <div class="font-semibold text-sm">Streaks &amp; consistency</div>
+            <div class="text-muted text-sm">Heatmap of study days so gaps are visible before they become habits.</div>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-success/15 grid place-items-center shrink-0"><i data-lucide="trophy" class="w-5 h-5 text-success"></i></div>
+          <div>
+            <div class="font-semibold text-sm">Achievements &amp; XP</div>
+            <div class="text-muted text-sm">Milestones tied to real mastery, not just time spent logged in.</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="analytics.html" class="btn btn-ghost mt-8">Explore full analytics <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+    </div>
+
+    <div class="reveal-scale card p-6">
+      <div class="flex items-center justify-between mb-6">
+        <span class="text-sm font-semibold">Quiz accuracy by topic</span>
+        <span class="text-xs text-muted">Last 30 days</span>
+      </div>
+      <canvas id="landingRadar" height="260"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= TESTIMONIALS ============================= -->
+<section class="py-20 lg:py-28 border-t border-white/5 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center reveal mb-14">
+    <span class="pill">Learner stories</span>
+    <h2 class="font-display font-semibold text-3xl lg:text-[2.75rem] mt-5 tracking-tight">Built alongside the people cramming at 1 a.m.</h2>
+  </div>
+
+  <div id="testimonialTrack" class="flex gap-5 px-6"></div>
+</section>
+
+<!-- ============================= PRICING ============================= -->
+<section id="pricing" class="py-20 lg:py-28 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="max-w-2xl mx-auto text-center reveal">
+      <span class="pill">Simple, honest pricing</span>
+      <h2 class="font-display font-semibold text-3xl lg:text-[2.75rem] mt-5 tracking-tight">Start free. Stay free.</h2>
+      <p class="text-muted mt-4">SmartStudy AI's core learning workspace is free for every student — no trial clock, no card required.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 mt-16 max-w-5xl mx-auto items-start">
+      <div class="reveal card p-8" style="--d:0ms">
+        <h3 class="font-display font-semibold text-lg">Starter</h3>
+        <p class="text-muted text-sm mt-2">For casual review sessions.</p>
+        <div class="mt-6 flex items-end gap-1">
+          <span class="text-4xl font-display font-bold">₹0</span>
+          <span class="text-muted text-sm mb-1">/ forever</span>
+        </div>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-success"></i> 5 documents / month</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-success"></i> Quiz &amp; flashcard agents</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-success"></i> Basic analytics</li>
+        </ul>
+        <a href="dashboard.html" class="btn btn-ghost w-full mt-8 justify-center">Get started</a>
+      </div>
+
+      <div class="reveal grad-border card p-8 relative glow-primary lg:scale-105" style="--d:100ms">
+        <span class="pill absolute -top-3 left-8">Most popular</span>
+        <h3 class="font-display font-semibold text-lg">Free — Full Access</h3>
+        <p class="text-muted text-sm mt-2">Everything unlocked, on us, for students.</p>
+        <div class="mt-6 flex items-end gap-1">
+          <span class="text-4xl font-display font-bold text-gradient">₹0</span>
+          <span class="text-muted text-sm mb-1">/ forever</span>
+        </div>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-success"></i> Unlimited documents</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-success"></i> All 9 agents, incl. Interview Coach</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-success"></i> Voice &amp; speech-to-text</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-success"></i> Full analytics + achievements</li>
+        </ul>
+        <a href="dashboard.html" class="btn btn-primary w-full mt-8 justify-center">Start Learning Free</a>
+      </div>
+
+      <div class="reveal card p-8" style="--d:200ms">
+        <h3 class="font-display font-semibold text-lg">Campus</h3>
+        <p class="text-muted text-sm mt-2">For study groups &amp; classrooms.</p>
+        <div class="mt-6 flex items-end gap-1">
+          <span class="text-4xl font-display font-bold">Custom</span>
+        </div>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-success"></i> Shared workspaces</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-success"></i> Leaderboards across cohorts</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-success"></i> Admin &amp; progress reporting</li>
+        </ul>
+        <a href="#faq" class="btn btn-ghost w-full mt-8 justify-center">Talk to us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= FAQ ============================= -->
+<section id="faq" class="py-20 lg:py-28 border-t border-white/5">
+  <div class="max-w-3xl mx-auto px-6 lg:px-8">
+    <div class="text-center reveal mb-14">
+      <span class="pill">Questions</span>
+      <h2 class="font-display font-semibold text-3xl lg:text-[2.75rem] mt-5 tracking-tight">Frequently asked</h2>
+    </div>
+
+    <div class="space-y-3" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ============================= CTA ============================= -->
+<section class="py-20 lg:py-28">
+  <div class="max-w-5xl mx-auto px-6 lg:px-8 reveal-scale">
+    <div class="grad-border card p-12 lg:p-16 text-center relative overflow-hidden glow-primary">
+      <div class="absolute -top-20 -right-20 w-64 h-64 bg-secondary/20 rounded-full blur-[100px]"></div>
+      <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-primary/25 rounded-full blur-[100px]"></div>
+      <h2 class="font-display font-semibold text-3xl lg:text-[2.6rem] tracking-tight relative">Your next study session deserves a team, not a search bar.</h2>
+      <p class="text-muted mt-4 max-w-xl mx-auto relative">Upload one document and watch all nine agents get to work in under a minute.</p>
+      <div class="flex flex-wrap items-center justify-center gap-4 mt-9 relative">
+        <a href="dashboard.html" class="btn btn-primary">Start Learning Free <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        <a href="upload.html" class="btn btn-ghost">Upload a document</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= FOOTER ============================= -->
+<footer class="border-t border-white/5 pt-16 pb-10">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid lg:grid-cols-5 gap-10">
+      <div class="lg:col-span-2">
+        <a href="index.html" class="flex items-center gap-2.5 mb-4">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+            <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
+          </div>
+          <span class="font-display font-semibold text-lg">SmartStudy <span class="text-secondary">AI</span></span>
+        </a>
+        <p class="text-muted text-sm max-w-xs leading-relaxed">A multi-agent learning workspace for students who'd rather understand the material than manage ten tools.</p>
+        <div class="flex items-center gap-3 mt-6">
+          <a href="#" class="w-9 h-9 rounded-lg glass grid place-items-center hover:border-white/25 transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+          <a href="#" class="w-9 h-9 rounded-lg glass grid place-items-center hover:border-white/25 transition-colors"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+          <a href="#" class="w-9 h-9 rounded-lg glass grid place-items-center hover:border-white/25 transition-colors"><i data-lucide="github" class="w-4 h-4"></i></a>
+          <a href="#" class="w-9 h-9 rounded-lg glass grid place-items-center hover:border-white/25 transition-colors"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-sm font-semibold mb-4">Product</div>
+        <div class="flex flex-col gap-3 text-sm text-muted">
+          <a href="#features" class="hover:text-ink transition-colors">Features</a>
+          <a href="#agents" class="hover:text-ink transition-colors">Agents</a>
+          <a href="dashboard.html" class="hover:text-ink transition-colors">Dashboard</a>
+          <a href="#pricing" class="hover:text-ink transition-colors">Pricing</a>
+        </div>
+      </div>
+      <div>
+        <div class="text-sm font-semibold mb-4">Workspace</div>
+        <div class="flex flex-col gap-3 text-sm text-muted">
+          <a href="upload.html" class="hover:text-ink transition-colors">Upload</a>
+          <a href="chat.html" class="hover:text-ink transition-colors">Document Chat</a>
+          <a href="quiz.html" class="hover:text-ink transition-colors">Quizzes</a>
+          <a href="flashcards.html" class="hover:text-ink transition-colors">Flashcards</a>
+          <a href="analytics.html" class="hover:text-ink transition-colors">Analytics</a>
+        </div>
+      </div>
+      <div>
+        <div class="text-sm font-semibold mb-4">Company</div>
+        <div class="flex flex-col gap-3 text-sm text-muted">
+          <a href="#" class="hover:text-ink transition-colors">About</a>
+          <a href="#faq" class="hover:text-ink transition-colors">FAQ</a>
+          <a href="#" class="hover:text-ink transition-colors">Privacy</a>
+          <a href="#" class="hover:text-ink transition-colors">Terms</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-14 pt-8 border-t border-white/5 text-xs text-muted">
+      <span>© 2026 SmartStudy AI. All rights reserved.</span>
+      <span>Designed &amp; built as a portfolio project.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="assets/js/landing.js"></script>
+</body>
+</html>

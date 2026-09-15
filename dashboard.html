@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard — SmartStudy AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { bg:'#050816', surface:'#0F172A', card:'#111827', primary:'#6366F1', secondary:'#22D3EE', success:'#10B981', warning:'#F59E0B', danger:'#EF4444', ink:'#F8FAFC', muted:'#94A3B8' },
+    fontFamily: { display:['Space Grotesk','Inter','sans-serif'], sans:['Inter','sans-serif'] }
+  } } }
+</script>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+</head>
+<body class="font-sans">
+
+<div class="app-shell">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="app-sidebar">
+    <a href="index.html" class="flex items-center gap-2.5 px-2 mb-8">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+        <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
+      </div>
+      <span class="font-display font-semibold text-base">SmartStudy <span class="text-secondary">AI</span></span>
+    </a>
+
+    <nav class="flex flex-col gap-1">
+      <a href="dashboard.html" class="sidebar-link active"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</a>
+      <a href="upload.html" class="sidebar-link"><i data-lucide="upload-cloud" class="w-4 h-4"></i> Upload</a>
+      <a href="chat.html" class="sidebar-link"><i data-lucide="message-circle" class="w-4 h-4"></i> Document Chat</a>
+      <a href="quiz.html" class="sidebar-link"><i data-lucide="list-checks" class="w-4 h-4"></i> Quizzes</a>
+      <a href="flashcards.html" class="sidebar-link"><i data-lucide="layers" class="w-4 h-4"></i> Flashcards</a>
+      <a href="analytics.html" class="sidebar-link"><i data-lucide="bar-chart-3" class="w-4 h-4"></i> Analytics</a>
+      <a href="profile.html" class="sidebar-link"><i data-lucide="user-circle" class="w-4 h-4"></i> Profile</a>
+    </nav>
+
+    <div class="mt-auto">
+      <div class="card p-4 mb-4">
+        <div class="flex items-center gap-2 mb-2"><i data-lucide="flame" class="w-4 h-4 text-warning"></i><span class="text-xs font-semibold">12-day streak</span></div>
+        <p class="text-[11px] text-muted leading-relaxed">Keep it going — 2 more days for a new badge.</p>
+      </div>
+      <a href="index.html" class="sidebar-link"><i data-lucide="log-out" class="w-4 h-4"></i> Back to site</a>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <div class="app-main">
+    <!-- topbar -->
+    <header class="app-topbar">
+      <div>
+        <h1 class="font-display font-semibold text-xl">Good evening, Ananya</h1>
+        <p class="text-muted text-sm">Tuesday roadmap · 3 tasks left</p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="hidden md:flex items-center gap-2 glass rounded-full px-4 py-2.5 w-64">
+          <i data-lucide="search" class="w-4 h-4 text-muted"></i>
+          <input type="text" placeholder="Search documents, quizzes..." class="bg-transparent text-sm outline-none w-full placeholder:text-muted" />
+        </div>
+        <button class="relative w-10 h-10 rounded-full glass grid place-items-center">
+          <i data-lucide="bell" class="w-4 h-4"></i>
+          <span class="absolute top-2 right-2.5 w-1.5 h-1.5 rounded-full bg-danger"></span>
+        </button>
+        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary"></div>
+      </div>
+    </header>
+
+    <main class="app-content">
+
+      <!-- quick stats -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+        <div class="card p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-muted">Study time today</span>
+            <i data-lucide="clock" class="w-4 h-4 text-secondary"></i>
+          </div>
+          <div class="text-2xl font-display font-bold">4.2h</div>
+          <div class="text-[11px] text-success mt-1">+18% vs yesterday</div>
+        </div>
+        <div class="card p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-muted">Quiz accuracy</span>
+            <i data-lucide="target" class="w-4 h-4 text-primary"></i>
+          </div>
+          <div class="text-2xl font-display font-bold">88%</div>
+          <div class="text-[11px] text-success mt-1">+4% this week</div>
+        </div>
+        <div class="card p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-muted">Streak</span>
+            <i data-lucide="flame" class="w-4 h-4 text-warning"></i>
+          </div>
+          <div class="text-2xl font-display font-bold">12 days</div>
+          <div class="text-[11px] text-muted mt-1">Best: 21 days</div>
+        </div>
+        <div class="card p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-muted">XP today</span>
+            <i data-lucide="zap" class="w-4 h-4 text-secondary"></i>
+          </div>
+          <div class="text-2xl font-display font-bold">+240</div>
+          <div class="text-[11px] text-muted mt-1">Level 7 · 640 to next</div>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-5 mb-6">
+        <!-- weekly analytics -->
+        <div class="card p-6 lg:col-span-2">
+          <div class="flex items-center justify-between mb-5">
+            <h2 class="font-display font-semibold">Weekly analytics</h2>
+            <div class="flex gap-1 text-xs">
+              <button class="px-3 py-1.5 rounded-full bg-primary/15 text-primary">Week</button>
+              <button class="px-3 py-1.5 rounded-full text-muted hover:bg-white/5">Month</button>
+            </div>
+          </div>
+          <canvas id="weeklyChart" height="140"></canvas>
+        </div>
+
+        <!-- today's goal -->
+        <div class="card p-6">
+          <h2 class="font-display font-semibold mb-5">Today's goal</h2>
+          <div class="flex items-center justify-center mb-5">
+            <div class="relative w-32 h-32">
+              <svg viewBox="0 0 120 120" class="w-32 h-32 -rotate-90">
+                <circle cx="60" cy="60" r="52" fill="none" stroke-width="10" class="ring-track"/>
+                <circle cx="60" cy="60" r="52" fill="none" stroke-width="10" stroke="#22D3EE" stroke-linecap="round"
+                  stroke-dasharray="326.7" stroke-dashoffset="98" />
+              </svg>
+              <div class="absolute inset-0 grid place-items-center">
+                <div class="text-center">
+                  <div class="text-xl font-display font-bold">70%</div>
+                  <div class="text-[10px] text-muted">3/4 tasks</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ul class="space-y-2.5 text-sm">
+            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-success"></i> <span class="line-through text-muted">Finish DBMS notes</span></li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-success"></i> <span class="line-through text-muted">10 flashcards reviewed</span></li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-success"></i> <span class="line-through text-muted">OS quiz — 80%+</span></li>
+            <li class="flex items-center gap-2"><i data-lucide="circle" class="w-4 h-4 text-muted"></i> Mock interview round</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-5 mb-6">
+        <!-- recent files -->
+        <div class="card p-6 lg:col-span-2">
+          <div class="flex items-center justify-between mb-5">
+            <h2 class="font-display font-semibold">Recent files</h2>
+            <a href="upload.html" class="text-xs text-secondary">Upload new</a>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-white/[.03] transition-colors">
+              <div class="w-10 h-10 rounded-lg bg-danger/15 grid place-items-center shrink-0"><i data-lucide="file-text" class="w-4 h-4 text-danger"></i></div>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium truncate">Data Structures — Ch. 4 Trees.pdf</div>
+                <div class="text-xs text-muted">Processed · 2 hours ago</div>
+              </div>
+              <a href="chat.html" class="btn btn-ghost btn-sm">Open</a>
+            </div>
+            <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-white/[.03] transition-colors">
+              <div class="w-10 h-10 rounded-lg bg-primary/15 grid place-items-center shrink-0"><i data-lucide="presentation" class="w-4 h-4 text-primary"></i></div>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium truncate">OS — Deadlock Slides.pptx</div>
+                <div class="text-xs text-muted">Processed · yesterday</div>
+              </div>
+              <a href="chat.html" class="btn btn-ghost btn-sm">Open</a>
+            </div>
+            <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-white/[.03] transition-colors">
+              <div class="w-10 h-10 rounded-lg bg-secondary/15 grid place-items-center shrink-0"><i data-lucide="file-type-2" class="w-4 h-4 text-secondary"></i></div>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium truncate">DBMS Normalization Notes.docx</div>
+                <div class="text-xs text-muted">Processed · 2 days ago</div>
+              </div>
+              <a href="chat.html" class="btn btn-ghost btn-sm">Open</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- leaderboard -->
+        <div class="card p-6">
+          <div class="flex items-center justify-between mb-5">
+            <h2 class="font-display font-semibold">Leaderboard</h2>
+            <i data-lucide="trophy" class="w-4 h-4 text-warning"></i>
+          </div>
+          <div class="space-y-3 text-sm">
+            <div class="flex items-center gap-3">
+              <span class="w-5 text-muted">1</span>
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-warning to-danger"></div>
+              <span class="flex-1">Kavya Nair</span>
+              <span class="text-muted">3120 XP</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="w-5 text-muted">2</span>
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary"></div>
+              <span class="flex-1">Rahul Verma</span>
+              <span class="text-muted">2890 XP</span>
+            </div>
+            <div class="flex items-center gap-3 p-2 -mx-2 rounded-lg bg-primary/10 border border-primary/25">
+              <span class="w-5 text-primary font-semibold">3</span>
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-secondary to-success"></div>
+              <span class="flex-1 font-medium">You</span>
+              <span class="text-secondary">2640 XP</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="w-5 text-muted">4</span>
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-success to-secondary"></div>
+              <span class="flex-1">Arjun Mehta</span>
+              <span class="text-muted">2410 XP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-5">
+        <!-- upcoming quiz -->
+        <div class="card p-6">
+          <h2 class="font-display font-semibold mb-4">Upcoming quiz</h2>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-primary/15 grid place-items-center"><i data-lucide="list-checks" class="w-5 h-5 text-primary"></i></div>
+            <div>
+              <div class="text-sm font-medium">Operating Systems — Deadlocks</div>
+              <div class="text-xs text-muted">15 questions · ~12 min</div>
+            </div>
+          </div>
+          <a href="quiz.html" class="btn btn-primary btn-sm w-full justify-center mt-5">Start quiz</a>
+        </div>
+
+        <!-- achievements -->
+        <div class="card p-6">
+          <h2 class="font-display font-semibold mb-4">Achievements</h2>
+          <div class="grid grid-cols-4 gap-3">
+            <div class="aspect-square rounded-xl bg-warning/15 grid place-items-center"><i data-lucide="flame" class="w-5 h-5 text-warning"></i></div>
+            <div class="aspect-square rounded-xl bg-success/15 grid place-items-center"><i data-lucide="trophy" class="w-5 h-5 text-success"></i></div>
+            <div class="aspect-square rounded-xl bg-secondary/15 grid place-items-center"><i data-lucide="brain" class="w-5 h-5 text-secondary"></i></div>
+            <div class="aspect-square rounded-xl bg-white/[.04] grid place-items-center"><i data-lucide="lock" class="w-4 h-4 text-muted"></i></div>
+          </div>
+          <p class="text-[11px] text-muted mt-4">3 of 18 badges unlocked</p>
+        </div>
+
+        <!-- ai chat quick access -->
+        <div class="card p-6 flex flex-col">
+          <h2 class="font-display font-semibold mb-4">Ask the AI Tutor</h2>
+          <p class="text-muted text-sm flex-1">Stuck on something right now? Jump straight into a chat grounded in your latest upload.</p>
+          <a href="chat.html" class="btn btn-primary btn-sm w-full justify-center mt-5">Open chat <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script>
+  window.addEventListener('load', () => {
+    const ctx = document.getElementById('weeklyChart');
+    if (ctx && window.Chart) {
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+          datasets: [
+            { label: 'Study hours', data: [2.1,3.4,1.8,4.2,3.0,2.6,1.4], backgroundColor: '#6366F1', borderRadius: 6, barPercentage: 0.55 },
+            { label: 'Quiz accuracy %', data: [70,75,68,88,82,79,84], type: 'line', borderColor: '#22D3EE', backgroundColor: '#22D3EE', tension: .4, yAxisID: 'y1', pointRadius: 3 }
+          ]
+        },
+        options: {
+          responsive: true,
+          interaction: { mode: 'index', intersect: false },
+          plugins: { legend: { labels: { color: '#94A3B8', boxWidth: 10, font: { size: 11 } } } },
+          scales: {
+            x: { ticks: { color: '#94A3B8' }, grid: { display: false } },
+            y: { ticks: { color: '#94A3B8' }, grid: { color: 'rgba(248,250,252,0.06)' } },
+            y1: { position: 'right', min: 0, max: 100, ticks: { color: '#94A3B8' }, grid: { display: false } }
+          }
+        }
+      });
+    }
+  });
+</script>
+</body>
+</html>

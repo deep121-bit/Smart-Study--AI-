@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Quiz — SmartStudy AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { bg:'#050816', surface:'#0F172A', card:'#111827', primary:'#6366F1', secondary:'#22D3EE', success:'#10B981', warning:'#F59E0B', danger:'#EF4444', ink:'#F8FAFC', muted:'#94A3B8' },
+    fontFamily: { display:['Space Grotesk','Inter','sans-serif'], sans:['Inter','sans-serif'] }
+  } } }
+</script>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+</head>
+<body class="font-sans">
+
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <a href="index.html" class="flex items-center gap-2.5 px-2 mb-8">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center"><i data-lucide="sparkles" class="w-5 h-5 text-white"></i></div>
+      <span class="font-display font-semibold text-base">SmartStudy <span class="text-secondary">AI</span></span>
+    </a>
+    <nav class="flex flex-col gap-1">
+      <a href="dashboard.html" class="sidebar-link"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</a>
+      <a href="upload.html" class="sidebar-link"><i data-lucide="upload-cloud" class="w-4 h-4"></i> Upload</a>
+      <a href="chat.html" class="sidebar-link"><i data-lucide="message-circle" class="w-4 h-4"></i> Document Chat</a>
+      <a href="quiz.html" class="sidebar-link active"><i data-lucide="list-checks" class="w-4 h-4"></i> Quizzes</a>
+      <a href="flashcards.html" class="sidebar-link"><i data-lucide="layers" class="w-4 h-4"></i> Flashcards</a>
+      <a href="analytics.html" class="sidebar-link"><i data-lucide="bar-chart-3" class="w-4 h-4"></i> Analytics</a>
+      <a href="profile.html" class="sidebar-link"><i data-lucide="user-circle" class="w-4 h-4"></i> Profile</a>
+    </nav>
+    <div class="mt-auto"><a href="index.html" class="sidebar-link"><i data-lucide="log-out" class="w-4 h-4"></i> Back to site</a></div>
+  </aside>
+
+  <div class="app-main">
+    <header class="app-topbar">
+      <div>
+        <h1 class="font-display font-semibold text-xl">Operating Systems — Deadlocks</h1>
+        <p class="text-muted text-sm">Quiz Agent · generated from your uploaded slides</p>
+      </div>
+      <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary"></div>
+    </header>
+
+    <main class="app-content max-w-4xl">
+
+      <!-- setup panel -->
+      <div id="quizSetup" class="card p-8">
+        <h2 class="font-display font-semibold text-lg mb-1">Configure your quiz</h2>
+        <p class="text-muted text-sm mb-6">Choose difficulty and question types — the Quiz Agent will pull straight from your document.</p>
+
+        <div class="mb-6">
+          <div class="text-xs font-semibold text-muted uppercase tracking-wide mb-3">Difficulty</div>
+          <div class="flex gap-3" id="difficultyGroup">
+            <button class="btn btn-ghost btn-sm flex-1" data-diff="Easy">Easy</button>
+            <button class="btn btn-primary btn-sm flex-1" data-diff="Medium">Medium</button>
+            <button class="btn btn-ghost btn-sm flex-1" data-diff="Hard">Hard</button>
+          </div>
+        </div>
+
+        <div class="mb-8">
+          <div class="text-xs font-semibold text-muted uppercase tracking-wide mb-3">Question types</div>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="card p-3.5 flex items-center gap-3 cursor-pointer"><input type="checkbox" checked class="accent-primary w-4 h-4" /> <span class="text-sm">Multiple choice</span></label>
+            <label class="card p-3.5 flex items-center gap-3 cursor-pointer"><input type="checkbox" checked class="accent-primary w-4 h-4" /> <span class="text-sm">Fill in the blank</span></label>
+            <label class="card p-3.5 flex items-center gap-3 cursor-pointer"><input type="checkbox" class="accent-primary w-4 h-4" /> <span class="text-sm">True / False</span></label>
+            <label class="card p-3.5 flex items-center gap-3 cursor-pointer"><input type="checkbox" class="accent-primary w-4 h-4" /> <span class="text-sm">Coding questions</span></label>
+          </div>
+        </div>
+
+        <button id="startQuizBtn" class="btn btn-primary w-full justify-center">Start quiz — 6 questions <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+      </div>
+
+      <!-- quiz runner -->
+      <div id="quizRunner" class="hidden">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-sm text-muted">Question <span id="qIndex">1</span> of <span id="qTotal">6</span></span>
+          <span class="pill" id="qDifficulty">Medium</span>
+        </div>
+        <div class="w-full h-1.5 rounded-full bg-white/5 overflow-hidden mb-8">
+          <div id="qProgress" class="h-full rounded-full bg-gradient-to-r from-primary to-secondary transition-all duration-500" style="width:16.6%"></div>
+        </div>
+
+        <div id="questionCard" class="reveal-scale in-view card p-8">
+          <!-- injected -->
+        </div>
+
+        <div class="flex justify-between mt-6">
+          <button id="skipBtn" class="btn btn-ghost">Skip</button>
+          <button id="nextBtn" class="btn btn-primary" disabled>Next question <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+        </div>
+      </div>
+
+      <!-- results -->
+      <div id="quizResults" class="hidden text-center card p-10">
+        <div class="w-24 h-24 rounded-full bg-gradient-to-br from-primary to-secondary grid place-items-center mx-auto mb-6 glow-primary">
+          <span id="scoreCircle" class="font-display font-bold text-2xl text-white">0%</span>
+        </div>
+        <h2 class="font-display font-semibold text-2xl mb-2">Nice work!</h2>
+        <p class="text-muted mb-8">You scored <span id="scoreText" class="text-ink font-semibold">0/6</span> — the Roadmap Agent has already logged your weak spots.</p>
+        <div class="flex flex-wrap gap-3 justify-center">
+          <a href="flashcards.html" class="btn btn-ghost">Review with flashcards</a>
+          <a href="analytics.html" class="btn btn-primary">View analytics <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/quiz.js"></script>
+</body>
+</html>

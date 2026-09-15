@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Upload — SmartStudy AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { bg:'#050816', surface:'#0F172A', card:'#111827', primary:'#6366F1', secondary:'#22D3EE', success:'#10B981', warning:'#F59E0B', danger:'#EF4444', ink:'#F8FAFC', muted:'#94A3B8' },
+    fontFamily: { display:['Space Grotesk','Inter','sans-serif'], sans:['Inter','sans-serif'] }
+  } } }
+</script>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+</head>
+<body class="font-sans">
+
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <a href="index.html" class="flex items-center gap-2.5 px-2 mb-8">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center"><i data-lucide="sparkles" class="w-5 h-5 text-white"></i></div>
+      <span class="font-display font-semibold text-base">SmartStudy <span class="text-secondary">AI</span></span>
+    </a>
+    <nav class="flex flex-col gap-1">
+      <a href="dashboard.html" class="sidebar-link"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</a>
+      <a href="upload.html" class="sidebar-link active"><i data-lucide="upload-cloud" class="w-4 h-4"></i> Upload</a>
+      <a href="chat.html" class="sidebar-link"><i data-lucide="message-circle" class="w-4 h-4"></i> Document Chat</a>
+      <a href="quiz.html" class="sidebar-link"><i data-lucide="list-checks" class="w-4 h-4"></i> Quizzes</a>
+      <a href="flashcards.html" class="sidebar-link"><i data-lucide="layers" class="w-4 h-4"></i> Flashcards</a>
+      <a href="analytics.html" class="sidebar-link"><i data-lucide="bar-chart-3" class="w-4 h-4"></i> Analytics</a>
+      <a href="profile.html" class="sidebar-link"><i data-lucide="user-circle" class="w-4 h-4"></i> Profile</a>
+    </nav>
+    <div class="mt-auto"><a href="index.html" class="sidebar-link"><i data-lucide="log-out" class="w-4 h-4"></i> Back to site</a></div>
+  </aside>
+
+  <div class="app-main">
+    <header class="app-topbar">
+      <div>
+        <h1 class="font-display font-semibold text-xl">Upload material</h1>
+        <p class="text-muted text-sm">Every agent starts from what you drop here.</p>
+      </div>
+      <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary"></div>
+    </header>
+
+    <main class="app-content max-w-5xl">
+
+      <div id="dropzone" class="grad-border card p-2 mb-8">
+        <div class="rounded-2xl border-2 border-dashed border-white/10 py-16 px-6 text-center transition-colors" id="dropInner">
+          <div class="w-16 h-16 rounded-2xl bg-primary/15 grid place-items-center mx-auto mb-5">
+            <i data-lucide="upload-cloud" class="w-7 h-7 text-primary"></i>
+          </div>
+          <h2 class="font-display font-semibold text-lg mb-2">Drag &amp; drop files here</h2>
+          <p class="text-muted text-sm mb-6">or click to browse your device</p>
+          <label class="btn btn-primary cursor-pointer inline-flex">
+            <i data-lucide="folder-open" class="w-4 h-4"></i> Choose files
+            <input type="file" id="fileInput" class="hidden" multiple />
+          </label>
+          <p class="text-[11px] text-muted mt-6">Supports PDF, DOCX, PPTX, TXT, CSV, and images (JPG/PNG) · up to 50MB each</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3 mb-10">
+        <span class="pill"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> PDF</span>
+        <span class="pill"><i data-lucide="file-type-2" class="w-3.5 h-3.5"></i> DOCX</span>
+        <span class="pill"><i data-lucide="presentation" class="w-3.5 h-3.5"></i> PPTX</span>
+        <span class="pill"><i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i> CSV</span>
+        <span class="pill"><i data-lucide="image" class="w-3.5 h-3.5"></i> Images (OCR)</span>
+        <span class="pill"><i data-lucide="file-type" class="w-3.5 h-3.5"></i> TXT</span>
+      </div>
+
+      <div id="progressList" class="space-y-3 mb-10"></div>
+
+      <div class="card p-6">
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="font-display font-semibold">Recent uploads</h2>
+          <span class="text-xs text-muted">7 documents</span>
+        </div>
+        <div class="space-y-3" id="recentUploads"></div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/upload.js"></script>
+</body>
+</html>
