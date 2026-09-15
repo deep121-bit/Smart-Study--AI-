@@ -1,8 +1,60 @@
+# Virtual environment
 venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Python cache
 __pycache__/
-*.pyc
+*.py[codz]
+*$py.class
+
+# Environment variables / secrets
 .env
+.envrc
+
+# Database files
 *.db
 *.sqlite
 *.sqlite3
+
+# IDE / editor
 .vscode/
+.idea/
+
+# Build / distribution
+build/
+dist/
+*.egg-info/
+.eggs/
+wheels/
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# Type checking / linting
+.mypy_cache/
+.dmypy.json
+.pyre/
+.pytype/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Streamlit secrets
+.streamlit/secrets.toml
