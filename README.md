@@ -1,3 +1,13 @@
+3 different Links:
+
+
+🌐 Website: https://deep121-bit.github.io/Smart-Study--AI/
+⚙️ Backend: https://smart-study-ai-1-1dzn.onrender.com/
+📚 API Docs: https://smart-study-ai-1-1dzn.onrender.com/docs
+
+
+
+
 # SmartStudy AI — Multi-Agent Intelligent Learning Assistant
 
 A premium, dark-mode AI SaaS UI concept: a landing page plus a working front-end
